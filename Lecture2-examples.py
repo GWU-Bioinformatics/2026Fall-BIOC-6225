@@ -220,6 +220,6 @@ import scipy
 import numpy as np
 import pandas as pd
 # This is true of AI/ML packages as well
-import sklearn
+import sklearn as skl
 # We can also import only the components we are interested in
 from sklearn.tree import DecisionTreeClassifier
