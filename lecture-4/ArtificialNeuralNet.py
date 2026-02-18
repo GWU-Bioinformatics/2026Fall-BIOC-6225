@@ -11,6 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sklearn
 import pandas as pd
+
+from sklearn.model_selection import train_test_split
 # ---------------------------------------- #
 
 # ---------------------------------------- #
@@ -42,12 +44,12 @@ import torch.nn.functional as F
 # Reformat data to a torch-friendly format, and set the batch size
 # (ie, how many points to train on at once)
 batch_size = 10
-x_tr_tensor = torch.from_numpy(x_train.to_numpy()).to(torch.float32)
+x_train_tensor = torch.from_numpy(x_train.to_numpy()).to(torch.float32)
 # 'Normalize' data
-x_tr_tensor = F.normalize(x_tr_tensor, p=2.0, dim=1)
-y_tr_tensor = torch.from_numpy(y_train.to_numpy()).to(torch.float32).unsqueeze(1)
+x_train_tensor = F.normalize(x_train_tensor, p=2.0, dim=1)
+y_train_tensor = torch.from_numpy(y_train.to_numpy()).to(torch.float32).unsqueeze(1)
 
-train_dataset = TensorDataset(x_tr_tensor, y_tr_tensor)
+train_dataset = TensorDataset(x_train_tensor, y_train_tensor)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 # ---------------------------------------- #
 
@@ -114,7 +116,7 @@ x_test_tensor = torch.from_numpy(x_test.to_numpy()).to(torch.float32)
 x_test_tensor = F.normalize(x_test_tensor, p=2.0, dim=1)
 y_test_tensor = torch.from_numpy(y_test.to_numpy()).to(torch.float32).unsqueeze(1)
 
-train_dataset = TensorDataset(x_test_tensor, y_tr_tensor)
+train_dataset = TensorDataset(x_test_tensor, y_test_tensor)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 # ---------------------------------------- #
 
